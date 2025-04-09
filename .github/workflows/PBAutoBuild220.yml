@@ -25,13 +25,13 @@ jobs:
         with:
           name: install 
           path: ${{ github.workspace }}/install.log 
-      
-           
+          
+                 
       - name: Run PBAutoBuild250.exe
         shell: cmd  
         run: |
           cd C:\
-          PBAutoBuild250 /f ./salesdemo_local.json /l deploy.log /le error.log /lu unsupport.log
+          PBAutoBuild250 /f C:\salesdemo_local.json /l deploy.log /le error.log /lu unsupport.log
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
