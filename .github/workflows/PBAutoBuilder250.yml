@@ -1,0 +1,46 @@
+name: Build and Attach to Pre-release
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+                
+      - name: Install Runtime
+        shell: cmd  # Specify cmd shell
+        run: |
+          PowerBuilderRuntime.exe /s /f1"D:\a\EBAdmin\EBAdmin\PowerBuilderRuntime-setup.iss" 
+          exit 0
+          
+      - name: Install Util
+        shell: cmd  # Specify cmd shell
+        run: |
+          PowerBuilderUtilities.exe /s /f1"D:\a\EBAdmin\EBAdmin\PowerBuilderUtilities-setup.iss" 
+          exit 0
+        
+      - name: Set SYSTEMDRIVE (Not recommended)
+        shell: cmd
+        run: |  
+          dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "Appeon folder not found."
+        
+      - name: Set SYSTEMDRIVE (Not recommended)
+
+        shell: cmd
+        run: |  
+          dir "C:\Program Files (x86)\Appeon\PowerBuilderUtilities 25.0" 2>nul  || echo "Appeon folder not found."
+          exit 0  # Force exit code 0 to indicate success    
+           
+      - name: Run PBAutoBuild250.exe
+        shell: cmd  # Specify cmd shell
+        run: |
+          PBAutoBuild250 /f ./ebadmin.json /l deploy.log /le error.log /lu unsupport.log
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: ./build/ebadmin_Installer.exe
