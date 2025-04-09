@@ -12,7 +12,7 @@ jobs:
                 
       - name: Install MSI Package 2 
         run: |
-          $file = "PBCLTRT 22.2.0.3397.msi" 
+          $file = "PBCLTRT 25.0.0.3398.msi" 
           $log = "install.log" 
           $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru
           $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
@@ -27,11 +27,11 @@ jobs:
           path: ${{ github.workspace }}/install.log 
       
            
-      - name: Run PBAutoBuild210.exe
+      - name: Run PBAutoBuild250.exe
         shell: cmd  
         run: |
           cd C:\
-          PBAutoBuild220 /f ./ebadmin.json /l deploy.log /le error.log /lu unsupport.log
+          PBAutoBuild250 /f ./salesdemo_local.json /l deploy.log /le error.log /lu unsupport.log
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
