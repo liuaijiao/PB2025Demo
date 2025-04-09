@@ -1,0 +1,40 @@
+name: Build and Attach to Pre-release
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+                
+      - name: Install MSI Package 2 
+        run: |
+          $file = "PBCLTRT 22.2.0.3397.msi" 
+          $log = "install.log" 
+          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru
+          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
+          $procMain.WaitForExit() 
+          $procLog.Kill()
+        
+          
+      - name: Upload MSI Log
+        uses: actions/upload-artifact@v4 # Use the latest version
+        with:
+          name: install 
+          path: ${{ github.workspace }}/install.log 
+      
+           
+      - name: Run PBAutoBuild210.exe
+        shell: cmd  
+        run: |
+          cd C:\
+          PBAutoBuild220 /f ./ebadmin.json /l deploy.log /le error.log /lu unsupport.log
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: ./build/ebadmin_Installer.exe
