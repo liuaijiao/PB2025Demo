@@ -12,7 +12,7 @@ jobs:
                 
       - name: Install MSI Package 2 
         run: |
-          $file = "PBCLTRT 25.0.0.3398.msi" 
+          $file = "C:\PBCLTRT 25.0.0.3398.msi" 
           $log = "install.log" 
           $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru
           $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
