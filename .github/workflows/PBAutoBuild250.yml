@@ -13,13 +13,13 @@ jobs:
       - name: Install Runtime
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderRuntime.exe /s
+          C:\PowerBuilderRuntime-3398\PowerBuilderRuntime.exe /s
           exit 0
           
       - name: Install Util
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderUtilities.exe /s
+          C:\PowerBuilderUtilities-3398\PowerBuilderUtilities.exe /s
           exit 0
         
       - name: Set SYSTEMDRIVE (Not recommended)
