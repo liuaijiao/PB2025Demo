@@ -13,13 +13,13 @@ jobs:
       - name: Install Runtime
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderRuntime.exe /s /f1"C:\a\EBAdmin\EBAdmin\PowerBuilderRuntime-setup.iss" 
+          PowerBuilderRuntime.exe /s
           exit 0
           
       - name: Install Util
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderUtilities.exe /s /f1"C:\a\EBAdmin\EBAdmin\PowerBuilderUtilities-setup.iss" 
+          PowerBuilderUtilities.exe /s
           exit 0
         
       - name: Set SYSTEMDRIVE (Not recommended)
@@ -37,7 +37,7 @@ jobs:
       - name: Run PBAutoBuild250.exe
         shell: cmd  # Specify cmd shell
         run: |
-          PBAutoBuild250 /f ./ebadmin.json /l deploy.log /le error.log /lu unsupport.log
+          PBAutoBuild250 /f C:\salesdemo_local.json /l deploy.log /le error.log /lu unsupport.log
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
