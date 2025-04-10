@@ -15,7 +15,7 @@ jobs:
       - name: Install Runtime
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderRuntime.exe /s
+          ./PowerBuilderRuntime.exe /s
           exit 0
           
       - name: Install Util
