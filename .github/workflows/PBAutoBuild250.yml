@@ -25,9 +25,8 @@ jobs:
       - name: Set SYSTEMDRIVE (Not recommended)
         shell: cmd
         run: |  
-          dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "Appeon folder not found."
-          dir "C:\Program Files (x86)\MSBuild" 2>nul  || echo "MSBuild folder not found." 
-        
+          dir "C:\Program Files (x86)\Appeon" 2>nul  || echo "Appeon folder not found."
+                  
       - name: Set SYSTEMDRIVE (Not recommended)
         shell: cmd
         run: |  
