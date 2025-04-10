@@ -28,8 +28,8 @@ jobs:
         shell: cmd
         run: |  
           dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "PowerBuilder folder not found."
-          ls C:\Program Files (x86)\Appeon\Common\PowerBuilder
-                  
+          dir D:\a\repo-name\repo-name
+          
       - name: Set SYSTEMDRIVE (Not recommended)
         shell: cmd
         run: |  
