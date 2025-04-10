@@ -5,22 +5,23 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    #runs-on: windows-latest
+    runs-on: windows-11
 
     steps:
       - uses: actions/checkout@v3
                 
-      - name: Install Runtime
-        shell: cmd  # Specify cmd shell
-        run: |
-          PowerBuilderRuntime.exe /s
-          exit 0
+      #- name: Install Runtime
+      #  shell: cmd  # Specify cmd shell
+      #  run: |
+      #    PowerBuilderRuntime.exe /s
+      #    exit 0
           
-      - name: Install Util
-        shell: cmd  # Specify cmd shell
-        run: |
-          PowerBuilderUtilities.exe /s
-          exit 0
+      #- name: Install Util
+      #  shell: cmd  # Specify cmd shell
+      #  run: |
+      #    PowerBuilderUtilities.exe /s
+      #    exit 0
         
       - name: Set SYSTEMDRIVE (Not recommended)
         shell: cmd
@@ -28,7 +29,7 @@ jobs:
           dir "C:\Program Files (x86)" 2>nul  || echo "Program Files (x86) folder not found."
           dir "C:\Program Files (x86)\Appeon" 2>nul  || echo "Appeon folder not found."
           dir "C:\Program Files (x86)\Appeon\Common" 2>nul  || echo "Common folder not found."
-             dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "PowerBuilder folder not found."
+          dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "PowerBuilder folder not found."
                   
       - name: Set SYSTEMDRIVE (Not recommended)
         shell: cmd
