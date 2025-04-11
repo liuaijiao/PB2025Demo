@@ -15,13 +15,13 @@ jobs:
       - name: Install Runtime
         shell: cmd  # Specify cmd shell
         run: |
-          PB2025Demo/PowerBuilderRuntime.exe /s
+          PowerBuilderRuntime.exe /s
           exit 0
           
       - name: Install Util
         #shell: cmd  # Specify cmd shell
         run: |
-          PB2025Demo/PowerBuilderUtilities.exe /s
+          PowerBuilderUtilities.exe /s
           exit 0
         
       - name: Set SYSTEMDRIVE (Not recommended)
