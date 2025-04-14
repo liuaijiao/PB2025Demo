@@ -6,8 +6,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    #runs-on: windows-11
-    #runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -15,34 +13,32 @@ jobs:
       - name: Install Runtime
         shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderRuntime.exe /s
+          PowerBuilderRuntime.exe /s /f1"D:\a\PowerBuilder-AutoBuild-Sales-Example\PowerBuilder-AutoBuild-Sales-Example\PowerBuilderRuntime-setup.iss" 
           exit 0
           
       - name: Install Util
-        #shell: cmd  # Specify cmd shell
+        shell: cmd  # Specify cmd shell
         run: |
-          PowerBuilderUtilities.exe /s
+          PowerBuilderUtilities.exe /s /f1"D:\a\PowerBuilder-AutoBuild-Sales-Example\PowerBuilder-AutoBuild-Sales-Example\PowerBuilderUtilities-setup.iss" 
           exit 0
         
-      - name: Set SYSTEMDRIVE (Not recommended)
+      - name: Verify Runtime Installed
         shell: cmd
         run: |  
           dir "C:\Program Files (x86)\Appeon\Common\PowerBuilder" 2>nul  || echo "Appeon folder not found."
-          dir "D:\a\repo-name\repo-name"
-          
-      - name: Set SYSTEMDRIVE (Not recommended)
+        
+      - name: Verify Utilities Installed
         shell: cmd
         run: |  
-          dir "C:\Program Files (x86)\Appeon\PowerBuilderUtilities 25.0" 2>nul  || echo "Appeon folder not found."
-          exit 0  # Force exit code 0 to indicate success    
+          dir "C:\Program Files (x86)\Appeon\PowerBuilderUtilities 22.0" 2>nul  || echo "Appeon folder not found."    
            
-      - name: Run PBAutoBuild250.exe
+      - name: Run PBAutoBuild210.exe
         shell: cmd  # Specify cmd shell
         run: |
-          PBAutoBuild250 /f C:\salesdemo_local.json /l deploy.log /le error.log /lu unsupport.log
+          "C:\Program Files (x86)\Appeon\PowerBuilderUtilities 22.0\PBAutoBuild220.exe" /f "pb_salesdemo.json" /l "Log_PBBuild.log" /le "Log_PBError.log"
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
-          path: ./build/ebadmin_Installer.exe
+          name: SalesDemoExe
+          path: ./Build/salesdemo.exe
